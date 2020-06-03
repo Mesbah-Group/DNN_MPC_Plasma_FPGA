@@ -1,8 +1,13 @@
-#ifndef TYPES
+/***************
+header file to define data types for use in implementation
 
-#define EXP_WIDTH	16
-#define INT_WIDTH	4
+Author: Kimberly Chan
+Organization: Mesbah Lab at UC Berkeley
+****************/
 
-typedef ap_fixed<EXP_WIDTH, INT_WIDTH> float24_t;
+#ifndef TYPES_
+
+
+// typedef float 
 
 #endif
