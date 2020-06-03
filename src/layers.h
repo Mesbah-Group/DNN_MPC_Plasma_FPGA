@@ -1,12 +1,12 @@
 /***************
-header file to define data types for use in implementation
+header file to define the Layer class
 
 Author: Kimberly Chan
 Organization: Mesbah Lab at UC Berkeley
 ****************/
 
-#ifndef TYPES_
-#define TYPES_
+#ifndef LAYERS_
+#define LAYERS_
 
 #include <fstream>
 #include <iostream>
@@ -14,8 +14,12 @@ Organization: Mesbah Lab at UC Berkeley
 #include <cstdlib>
 using namespace std;
 
+#include "types.h"
+
 // use '#define' to define global constants
 
 // use 'typedef' to define types for variables
+
+// define functions/classes
 
 #endif
