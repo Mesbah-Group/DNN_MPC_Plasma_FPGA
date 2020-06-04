@@ -6,9 +6,7 @@ function [] = net2txt(net, filename)
 if class(net) ~= 'network'
     error('Class not supported.');
 else
-    n_in = net.numInputs;
     L = net.numLayers;
-    n_out = net.numOutputs;
     
     fileID = fopen(filename, 'w');
     
