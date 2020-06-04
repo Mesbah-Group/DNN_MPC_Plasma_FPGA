@@ -3,7 +3,7 @@
 load('DNN_training.mat', 'net')
 
 in = [1 1 1]';
-out = evaluateDNN(in, net);
+out = sim(net, in);
 
 filename = 'out.txt';
 sprintf('The output of the NN was')
