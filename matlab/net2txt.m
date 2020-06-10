@@ -8,7 +8,7 @@ if class(net) ~= 'network'
 else
     L = net.numLayers;
     
-    fileID = fopen(filename, 'w');
+    fileID = fopen(filename, 'a');
     
     % write weights and biases to file
     fprintf(fileID, '%f ', net.IW{1}');
