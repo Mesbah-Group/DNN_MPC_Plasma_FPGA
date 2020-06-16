@@ -72,6 +72,7 @@ data_t * scale(data_t input[], data_t x_max[], data_t x_min[], data_t new_max, d
 	for (int i=0; i<NUM_INPUTS; i++) {
 		scaled_x[i] = (new_max - new_min) * (input[i] - x_min[i])/(x_max[i] - x_min[i]) + new_min;
 	}
+	return scaled_x;
 }
 
 data_t * h_layer(data_t input[], data_t weights[NUM_NODES][NUM_NODES], data_t biases[NUM_NODES]) {

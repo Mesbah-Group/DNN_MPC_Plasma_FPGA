@@ -3,7 +3,7 @@
 load('DNN_training.mat', 'net')
 
 in = [-0.3 0.5 0.7]';
-in = [0 0 0]';
+in = [0.329648 0.721062 0.496215]';
 out = sim(net, in);
 
 filename = 'out.txt';

@@ -18,9 +18,12 @@ typedef float data_t;
 #define NUM_OUTPUTS 2
 #define N 1
 
-void neural_net(data_t input[NUM_INPUTS], data_t ouput[NUM_OUTPUTS]);
+void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS]);
+
 data_t relu(data_t z);
+
 data_t * scale(data_t input[], data_t x_max[], data_t x_min[], data_t new_max, data_t new_min);
+
 data_t * h_layer(data_t input[], data_t weights[NUM_NODES][NUM_NODES], data_t biases[NUM_NODES]);
 
 #endif
