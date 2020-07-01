@@ -18,10 +18,37 @@ typedef float data_t;
 #define NUM_OUTPUTS 2
 #define N 1
 
+// function prototypes
 void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale01);
-data_t relu(data_t z);
+void in_layer(data_t x[NUM_INPUTS], data_t out[NUM_NODES], data_t W[NUM_NODES][NUM_INPUTS], data_t b[NUM_NODES], int act);
+void hidden_layer(data_t x[NUM_NODES], data_t out[NUM_NODES], data_t W[NUM_NODES][NUM_NODES], data_t b[NUM_NODES], int act);
+void out_layer(data_t x[NUM_NODES], data_t out[NUM_OUTPUTS], data_t W[NUM_OUTPUTS][NUM_NODES], data_t b[NUM_NODES], int act);
+
+// template functions
+template <typename T>
+T relu_template(T z) {
+	return z > (T) 0 ? z : 0;
+}
+
+template <typename T, int DIM1, int DIM2>
+void layer_template(T x[DIM1], T out[DIM2], T W[DIM2][DIM1], T b[DIM2], int act) {
+	int i, j;
+	// perform affine transformation (matrix multiplication)
+	for (i=0; i<DIM2; i++) {
+		out[i] = 0;
+		for (j=0; j<DIM1; j++) {
+			out[i] += x[j] * W[i][j];
+		}
+		out[i] += b[i];
+
+		// perform activation
+		// act == 1 is relu; otherwise linear
+		if (act == 1) {
+			out[i] = relu_template<T>(out[i]);
+		}
+	}
+}
 //data_t * scale(data_t input[], data_t x_max[], data_t x_min[], data_t new_max, data_t new_min);
-//data_t * h_layer(data_t input[], data_t weights[NUM_NODES][NUM_NODES], data_t biases[NUM_NODES]);
 
 #endif
 

@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "neural_net.h"
 
-#define EPS 0.1
+#define EPS 0.00001
 
 int main() {
 	data_t test_input[NUM_INPUTS] = {0.329648, 0.721062, 0.496215};
