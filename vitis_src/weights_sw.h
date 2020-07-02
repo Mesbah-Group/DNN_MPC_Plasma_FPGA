@@ -5,8 +5,8 @@
  * Organization: Mesbah Lab at UC Berkeley
  */
 
-#ifndef NEURAL_NET_H
-#define NEURAL_NET_H
+#ifndef WEIGHTS_SW_H
+#define WEIGHTS_SW_H
 
 //#include <stdlib.h>
 //#include <math.h>
