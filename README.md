@@ -4,7 +4,11 @@ Project files for a neural network (NN) implementation on an FPGA using Vivado H
 
 ## Project Files
 
-The `src` directory provides the C/C++ files for use in Vivado HLS to synthesis a design for implementation.
+The `hls_src` directory provides the C/C++ files for use in Vivado HLS to synthesize a design for implementation.
+
+The `vitis_src` directory provides the C/C++ files for use in Vitis to implement the synthesized algorithm (compares software implementation and hardware implementation).
+
+The `vivado` directory provides the project files for Vivado Hardware Design.
 
 The `matlab` directory provides:
   - MATLAB code to convert trained NN data into text files.
