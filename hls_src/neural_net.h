@@ -34,9 +34,9 @@ template <typename T, int DIM1, int DIM2>
 void layer_template(T x[DIM1], T out[DIM2], T W[DIM2][DIM1], T b[DIM2], int act) {
 	int i, j;
 	// perform affine transformation (matrix multiplication)
-	for (i=0; i<DIM2; i++) {
+	loop1: for (i=0; i<DIM2; i++) {
 		out[i] = 0;
-		for (j=0; j<DIM1; j++) {
+		loop2: for (j=0; j<DIM1; j++) {
 			out[i] += x[j] * W[i][j];
 		}
 		out[i] += b[i];

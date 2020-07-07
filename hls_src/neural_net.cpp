@@ -40,29 +40,27 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 		scaled_x2[i] = (new_max - new_min) * (scaled_x[i] - min)/(max - min) + new_min;
 	}
 
+
+    // initialize containers for layer outputs
+	data_t out1[NUM_NODES], out2[NUM_NODES], out3[NUM_NODES];
+	data_t out4[NUM_NODES], out5[NUM_NODES], out6[NUM_OUTPUTS];
+
 	// input layer
-    // initialize container for layer output
-	data_t out1[NUM_NODES] = {0};
 	in_layer(scaled_x2, out1, input_weights, input_biases, 1);
 
 	// hidden layer 1
-	data_t out2[NUM_NODES] = {0};
 	hidden_layer(out1, out2, hlayer1_weights, hlayer1_biases, 1);
 
 	// hidden layer 2
-	data_t out3[NUM_NODES] = {0};
 	hidden_layer(out2, out3, hlayer2_weights, hlayer2_biases, 1);
 
 	// hidden layer 3
-	data_t out4[NUM_NODES] = {0};
 	hidden_layer(out3, out4, hlayer3_weights, hlayer3_biases, 1);
 
 	// hidden layer 4
-	data_t out5[NUM_NODES] = {0};
 	hidden_layer(out4, out5, hlayer4_weights, hlayer4_biases, 1);
 
 	// hidden layer 5 (last layer)
-	data_t out6[NUM_OUTPUTS] = {0};
 	out_layer(out5, out6, hlayer5_weights, hlayer5_biases, 0);
 
 	// unscale output [-1,1] --> [0,1]
