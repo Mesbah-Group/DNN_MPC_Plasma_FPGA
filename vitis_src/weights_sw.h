@@ -8,9 +8,6 @@
 #ifndef WEIGHTS_SW_H
 #define WEIGHTS_SW_H
 
-//#include <stdlib.h>
-//#include <math.h>
-
 typedef float data_t;
 
 #define NUM_LAYERS 5

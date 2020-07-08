@@ -21,11 +21,13 @@
 #include "xparameters.h"
 #include "xaxidma.h"
 #include "xtmrctr.h"
-//#include "xneural_net_neural_net.h"
 #include "xstatus.h"
 #include "weights_sw.h"
-#include "nn_sw.h"
 #include "nn_hw.h"
+
+/***** SW COMPARISON FUNCTION DECLARATIONS ******/
+void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale01);
+data_t relu(data_t z);
 
 /*********** MACROS ************/
 #define DMA_DEV_ID XPAR_AXIDMA_0_DEVICE_ID
@@ -82,15 +84,15 @@ int main() {
 
 	unsigned int dma_size = NUM_INPUTS * sizeof(float);
 
-	float test_input[NUM_INPUTS] = {0};
-	data_t test_in[NUM_INPUTS] = {0};
+	float test_input[NUM_INPUTS] = {0.329648, 0.721062, 0.496215};
+	data_t test_in[NUM_INPUTS] = {0.329648, 0.721062, 0.496215};
 	data_t expected_output[NUM_OUTPUTS] = {0};
 	float test_output[NUM_OUTPUTS] = {0};
 	bool scale01 = 0;
 
     init_platform();
 
-    print("\n\nHello World\n\r");
+    print("\n\n\rHello World\n\r");
 
     int status;
 
@@ -121,7 +123,7 @@ int main() {
 
 
     /*********** RUN SOFTWARE VERSION **********/
-    printf("Running Software Implementation of Algorithm");
+    printf("************Running Software Implementation of Algorithm**************\n");
     XTmrCtr_Reset(&timer_dev, TIMER_DEV_ID);
     begin_time = XTmrCtr_GetValue(&timer_dev, TIMER_DEV_ID);
 
@@ -129,12 +131,12 @@ int main() {
 
     end_time = XTmrCtr_GetValue(&timer_dev, TIMER_DEV_ID);
     run_time_sw = end_time - begin_time - calibration;
-    printf("Expected Output: %f, %f\r\n", expected_output[0], expected_output[1]);
+    printf("\rExpected Output: [%f, %f]\n\r", expected_output[0], expected_output[1]);
     printf("\rSW Runtime was %d cycles\n\r", run_time_sw);
 
 
     /*********** RUN HARDWARE VERSION **********/
-    printf("Running Hardware Implementation of Algorithm");
+    printf("************Running Hardware Implementation of Algorithm**************\n");
     XTmrCtr_Reset(&timer_dev, TIMER_DEV_ID);
     begin_time = XTmrCtr_GetValue(&timer_dev, TIMER_DEV_ID);
 
@@ -143,13 +145,14 @@ int main() {
 
     end_time = XTmrCtr_GetValue(&timer_dev, TIMER_DEV_ID);
     run_time_hw = end_time - begin_time - calibration;
-    printf("\rTest Output: %f, %f\n\r", test_output[0], test_output[1]);
+    printf("\rTest Output: [%f, %f]\n\r", test_output[0], test_output[1]);
     printf("\rHW (AXI DMA + Accelerator) Runtime is %d cycles\n\r", run_time_hw);
 
     cleanup_platform();
     return 0;
 }
 
+/************ SOFTWARE FUNCTIONS **************/
 void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale01) {
 	// initialize output to zero
 	for (int i=0; i<NUM_OUTPUTS; i++) {
@@ -183,8 +186,9 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 	}
 
 	// input layer
-    // initialize container for layer output
-	data_t out1[NUM_NODES] = {0};
+    // initialize containers for layer outputs
+	data_t out1[NUM_NODES], out2[NUM_NODES], out3[NUM_NODES], out4[NUM_NODES], out5[NUM_NODES] = {0};
+	data_t out6[NUM_OUTPUTS] = {0};
 
 	// perform affine transformation (X@W + b)
 	for (int i=0; i<NUM_NODES; i++) {
@@ -198,10 +202,6 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 	}
 
 	// hidden layer 1
-//	data_t *out2 = h_layer(out1, hlayer1_weights, hlayer1_biases);
-    // initialize container for layer output
-	data_t out2[NUM_NODES] = {0};
-
 	// perform affine transformation (X@W + b)
 	for (int i=0; i<NUM_NODES; i++) {
 		for (int j=0; j<NUM_NODES; j++) {
@@ -214,10 +214,6 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 	}
 
 	// hidden layer 2
-//	data_t *out3 = h_layer(out2, hlayer2_weights, hlayer2_biases);
-    // initialize container for layer output
-	data_t out3[NUM_NODES] = {0};
-
 	// perform affine transformation (X@W + b)
 	for (int i=0; i<NUM_NODES; i++) {
 		for (int j=0; j<NUM_NODES; j++) {
@@ -230,10 +226,6 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 	}
 
 	// hidden layer 3
-//	data_t *out4 = h_layer(out3, hlayer3_weights, hlayer3_biases);
-    // initialize container for layer output
-	data_t out4[NUM_NODES] = {0};
-
 	// perform affine transformation (X@W + b)
 	for (int i=0; i<NUM_NODES; i++) {
 		for (int j=0; j<NUM_NODES; j++) {
@@ -246,10 +238,6 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 	}
 
 	// hidden layer 4
-//	data_t *out5 = h_layer(out4, hlayer4_weights, hlayer4_biases);
-    // initialize container for layer output
-	data_t out5[NUM_NODES] = {0};
-
 	// perform affine transformation (X@W + b)
 	for (int i=0; i<NUM_NODES; i++) {
 		for (int j=0; j<NUM_NODES; j++) {
@@ -261,30 +249,34 @@ void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale
 		out5[i] = relu(out5[i]);
 	}
 
-	// hidden layer 5
+	// hidden layer 5 (last layer)
 	// perform affine transformation (X@W + b)
 	for (int i=0; i<NUM_OUTPUTS; i++) {
 		for (int j=0; j<NUM_NODES; j++) {
-			output[i] += out5[j] * hlayer5_weights[i][j];
+			out6[i] += out5[j] * hlayer5_weights[i][j];
 		}
-		output[i] += hlayer5_biases[i];
+		out6[i] += hlayer5_biases[i];
 	}
 
 	// unscale output [-1,1] --> [0,1]
 	for (int i=0; i<NUM_OUTPUTS; i++) {
-		output[i] = (output[i] - new_min) * (max - min)/(new_max - new_min) + min;
+		out6[i] = (out6[i] - new_min) * (max - min)/(new_max - new_min) + min;
 	}
 
 	// unscale output [0,1] --> [real values]
 	if (scale01) {
 		new_min = -1;
 		for (int i=0; i<NUM_OUTPUTS; i++) {
-			output[i] = (output[i] - new_min) * (yscale_max[i] - yscale_min[i])/(new_max - new_min) + yscale_min[i];
+			output[i] = (out6[i] - new_min) * (yscale_max[i] - yscale_min[i])/(new_max - new_min) + yscale_min[i];
+		}
+	} else {
+		for (int i=0; i<NUM_OUTPUTS; i++) {
+			output[i] = out6[i];
 		}
 	}
+
 }
 
 data_t relu(data_t z) {
 	return z > (data_t) 0 ? z : 0;
 }
-

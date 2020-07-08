@@ -59,10 +59,10 @@ int XNnSetupInterrupt() {
 	int result;
 	XScuGic_Config *pCfg = XScuGic_LookupConfig(XPAR_SCUGIC_0_DEVICE_ID);
 	if (pCfg == NULL) {
-		printf("Interrupt Configuration Lookup Failed\n\r");
+		print("Interrupt Configuration Lookup Failed\n\r");
 		return XST_FAILURE;
 	}
-	result = XScuGic_CfgInitialize(&ScuGic, pCfg->CpuBaseAddress);
+	result = XScuGic_CfgInitialize(&ScuGic, pCfg, pCfg->CpuBaseAddress);
 	if (result != XST_SUCCESS) {
 		return result;
 	}
@@ -89,12 +89,12 @@ int Setup_HW_Accelerator(float input[NUM_INPUTS], float output[NUM_OUTPUTS], boo
 	// set up the HLS Block
 	int status = XNnSetup();
 	if (status != XST_SUCCESS) {
-		printf("Error: Example Setup Failed\n");
+		print("Error: Example Setup Failed\n");
 		return XST_FAILURE;
 	}
 	status = XNnSetupInterrupt();
 	if (status != XST_SUCCESS) {
-		printf("Error: Interrupt Setup Failed\n");
+		print("Error: Interrupt Setup Failed\n");
 		return XST_FAILURE;
 	}
 
@@ -105,7 +105,7 @@ int Setup_HW_Accelerator(float input[NUM_INPUTS], float output[NUM_OUTPUTS], boo
 	Xil_DCacheFlushRange((unsigned int)input, dma_size);
 	Xil_DCacheFlushRange((unsigned int)output, dma_size);
 //	Xil_DCacheFlushRange((unsinged int scale01, dma_size));
-	printf("\rCache Cleared\n\r");
+	print("\rCache Cleared\n\r");
 
 	return 0;
 }
@@ -113,12 +113,12 @@ int Setup_HW_Accelerator(float input[NUM_INPUTS], float output[NUM_OUTPUTS], boo
 void Start_HW_Accelerator() {
 	int status = XNnSetup();
 	if (status != XST_SUCCESS) {
-		printf("Error: Example Setup Failed\n");
+		print("Error: Example Setup Failed\n");
 		return XST_FAILURE;
 	}
 	status = XNnSetupInterrupt();
 	if (status != XST_SUCCESS) {
-		printf("Error: Interrupt Setup Failed\n");
+		print("Error: Interrupt Setup Failed\n");
 		return XST_FAILURE;
 	}
 	XNnStart(&xnn_dev);
@@ -127,29 +127,29 @@ void Start_HW_Accelerator() {
 
 int Run_HW_Accelerator(float input[NUM_INPUTS], float output[NUM_OUTPUTS], bool scale01, int dma_size) {
 	// transfer input to HLS block
-	printf("Transmitting data to HLS...");
+	print("Transmitting data to HLS...\n\r");
 	int status = XAxiDma_SimpleTransfer(&AxiDma, (unsigned int) input, dma_size, XAXIDMA_DMA_TO_DEVICE);
 	if (status != XST_SUCCESS) {
-		printf("Error: DMA transfer TO HLS block failed\n");
+		print("Error: DMA transfer TO HLS block failed\n");
 		return XST_FAILURE;
 	}
 
 	// wait for transfer to be done
-	while (XAxiDma_Busy(&Axi_Dma, XAXIDMA_DMA_TO_DEVICE));
+	while (XAxiDma_Busy(&AxiDma, XAXIDMA_DMA_TO_DEVICE));
 
 	// get results from HLS block
-	printf("Receiving data from HLS...");
+	print("Receiving data from HLS...\n\r");
 	status = XAxiDma_SimpleTransfer(&AxiDma, (unsigned int) output, dma_size, XAXIDMA_DEVICE_TO_DMA);
 	if (status != XST_SUCCESS) {
-		printf("Error: DMA transfer FROM HLS block failed\n");
+		print("Error: DMA transfer FROM HLS block failed\n");
 		return XST_FAILURE;
 	}
 
 	// wait for transfer to be done
-	while (XAxiDma_Busy(&Axi_Dma, XAXIDMA_DEVICE_TO_DMA));
+	while (XAxiDma_Busy(&AxiDma, XAXIDMA_DEVICE_TO_DMA));
 
 	// ensure all transfers are done
-	while (XAxiDma_Busy(&Axi_Dma, XAXIDMA_DEVICE_TO_DMA) || XAxiDma_Busy(&Axi_Dma, XAXIDMA_DMA_TO_DEVICE));
+//	while (XAxiDma_Busy(&AxiDma, XAXIDMA_DEVICE_TO_DMA) || XAxiDma_Busy(&AxiDma, XAXIDMA_DMA_TO_DEVICE));
 
 	return 0;
 }
