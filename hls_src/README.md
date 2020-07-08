@@ -1,4 +1,4 @@
-#HLS Source Files
+# HLS Source Files
 
 `src` folder includes the C/C++ project files for HLS
 
