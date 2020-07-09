@@ -7,9 +7,10 @@
 #ifndef NEURAL_NET_H
 #define NEURAL_NET_H
 
-//#include <stdlib.h>
-//#include <math.h>
+#include "ap_axi_sdata.h"
+//#include "weights.h"
 
+typedef ap_axiu<32,4,5,5> AXI_VAL;
 typedef float data_t;
 
 #define NUM_LAYERS 5
@@ -18,11 +19,28 @@ typedef float data_t;
 #define NUM_OUTPUTS 2
 #define N 1
 
+extern data_t xscale_max[NUM_INPUTS], xscale_min[NUM_INPUTS];
+extern data_t yscale_max[NUM_OUTPUTS], yscale_min[NUM_OUTPUTS];
+extern data_t input_weights[NUM_NODES][NUM_INPUTS];
+extern data_t hlayer1_weights[NUM_NODES][NUM_NODES];
+extern data_t hlayer2_weights[NUM_NODES][NUM_NODES];
+extern data_t hlayer3_weights[NUM_NODES][NUM_NODES];
+extern data_t hlayer4_weights[NUM_NODES][NUM_NODES];
+extern data_t hlayer5_weights[NUM_OUTPUTS][NUM_NODES];
+extern data_t input_biases[NUM_NODES];
+extern data_t hlayer1_biases[NUM_NODES];
+extern data_t hlayer2_biases[NUM_NODES];
+extern data_t hlayer3_biases[NUM_NODES];
+extern data_t hlayer4_biases[NUM_NODES];
+extern data_t hlayer5_biases[NUM_OUTPUTS];
+
 // function prototypes
-void neural_net(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale01);
-void in_layer(data_t x[NUM_INPUTS], data_t out[NUM_NODES], data_t W[NUM_NODES][NUM_INPUTS], data_t b[NUM_NODES], int act);
-void hidden_layer(data_t x[NUM_NODES], data_t out[NUM_NODES], data_t W[NUM_NODES][NUM_NODES], data_t b[NUM_NODES], int act);
-void out_layer(data_t x[NUM_NODES], data_t out[NUM_OUTPUTS], data_t W[NUM_OUTPUTS][NUM_NODES], data_t b[NUM_NODES], int act);
+void nn_accel(AXI_VAL INPUT_STREAM[NUM_INPUTS], AXI_VAL OUTPUT_STREAM[NUM_OUTPUTS]);
+void standalone_nn(data_t input[NUM_INPUTS], data_t output[NUM_OUTPUTS], bool scale01);
+//void in_layer(data_t x[NUM_INPUTS], data_t out[NUM_NODES], data_t W[NUM_NODES][NUM_INPUTS], data_t b[NUM_NODES], int act);
+//void hidden_layer(data_t x[NUM_NODES], data_t out[NUM_NODES], data_t W[NUM_NODES][NUM_NODES], data_t b[NUM_NODES], int act);
+//void out_layer(data_t x[NUM_NODES], data_t out[NUM_OUTPUTS], data_t W[NUM_OUTPUTS][NUM_NODES], data_t b[NUM_NODES], int act);
+
 
 // template functions
 template <typename T>
@@ -48,7 +66,140 @@ void layer_template(T x[DIM1], T out[DIM2], T W[DIM2][DIM1], T b[DIM2], int act)
 		}
 	}
 }
-//data_t * scale(data_t input[], data_t x_max[], data_t x_min[], data_t new_max, data_t new_min);
+
+// function to be accelerated
+template <typename T, int DIM1, int DIM2>
+void neural_net(T in[DIM1], T out[DIM2], bool scale01 = false) {
+	// scale data to range(0,1)
+	T scaled_x[NUM_INPUTS] = {0};
+	T new_max = 1;
+	T new_min = 0;
+
+	if (scale01) {
+		scale01_loop1: for (int i=0; i<NUM_INPUTS; i++) {
+			scaled_x[i] = (new_max - new_min) * (in[i] - xscale_min[i])/(xscale_max[i] - xscale_min[i]) + new_min;
+		}
+	} else {
+		scale01_loop0: for (int i=0; i<NUM_INPUTS; i++) {
+			scaled_x[i] = in[i];
+		}
+	}
+
+	// scale data to range(-1, 1)
+	T scaled_x2[NUM_INPUTS] = {0};
+	T max = 1;
+	T min = 0;
+	new_min = -1;
+
+	scale11_loop: for (int i=0; i<NUM_INPUTS; i++) {
+		scaled_x2[i] = (new_max - new_min) * (scaled_x[i] - min)/(max - min) + new_min;
+	}
+
+
+	// initialize containers for layer outputs
+	T out1[NUM_NODES], out2[NUM_NODES], out3[NUM_NODES];
+	T out4[NUM_NODES], out5[NUM_NODES], out6[NUM_OUTPUTS];
+
+	// input layer
+	layer_template<T, NUM_INPUTS, NUM_NODES>(scaled_x2, out1, input_weights, input_biases, 1);
+
+	// hidden layer 1
+	layer_template<T, NUM_NODES, NUM_NODES>(out1, out2, hlayer1_weights, hlayer1_biases, 1);
+
+	// hidden layer 2
+	layer_template<T, NUM_NODES, NUM_NODES>(out2, out3, hlayer2_weights, hlayer2_biases, 1);
+
+	// hidden layer 3
+	layer_template<T, NUM_NODES, NUM_NODES>(out3, out4, hlayer3_weights, hlayer3_biases, 1);
+
+	// hidden layer 4
+	layer_template<T, NUM_NODES, NUM_NODES>(out4, out5, hlayer4_weights, hlayer4_biases, 1);
+
+	// hidden layer 5 (last layer)
+	layer_template<T, NUM_NODES, NUM_OUTPUTS>(out5, out6, hlayer5_weights, hlayer5_biases, 0);
+
+	// unscale output [-1,1] --> [0,1]
+	unscale11_loop: for (int i=0; i<NUM_OUTPUTS; i++) {
+		out6[i] = (out6[i] - new_min) * (max - min)/(new_max - new_min) + min;
+	}
+
+	// unscale output [0,1] --> [real values]
+	if (scale01) {
+		new_min = -1;
+		unscale01_loop1: for (int i=0; i<NUM_OUTPUTS; i++) {
+			out[i] = (out6[i] - new_min) * (yscale_max[i] - yscale_min[i])/(new_max - new_min) + yscale_min[i];
+		}
+	} else {
+		unscale01_loop0: for (int i=0; i<NUM_OUTPUTS; i++) {
+			out[i] = out6[i];
+		}
+	}
+}
+
+// functions to insert and extract elements from an axi stream
+// includes conversion to correct data type
+
+template <typename T, int U, int TI, int TD>
+T pop_stream(ap_axiu <sizeof(T)*8,U,TI,TD> const &e) {
+
+	union {
+		int ival;
+		T oval;
+	} converter;
+	converter.ival = e.data;
+	T ret = converter.oval;
+
+	volatile ap_uint<sizeof(T)> strb = e.strb;
+	volatile ap_uint<sizeof(T)> keep = e.keep;
+	volatile ap_uint<U> user = e.user;
+	volatile ap_uint<1> last = e.last;
+	volatile ap_uint<TI> id = e.id;
+	volatile ap_uint<TD> dest = e.dest;
+
+	return ret;
+}
+
+template <typename T, int U, int TI, int TD>
+ap_axiu<sizeof(T)*8,U,TI,TD> push_stream(T const &v, bool last = false) {
+	ap_axiu<sizeof(T)*8,U,TI,TD> e;
+
+	union {
+		int oval;
+		T ival;
+	} converter;
+	converter.ival = v;
+	e.data = converter.oval;
+
+	// set to sizeof(T) ones
+	e.strb = -1;
+	e.keep = 15; //e.strb
+	e.user = 0;
+	e.last = last ? 1 : 0;
+	e.id = 0;
+	e.dest = 0;
+	return e;
+}
+
+// function to be accelerated in HW wrapped with AXI4-Stream Interface
+
+template <typename T, int DIM1, int DIM2, int U, int TI, int TD>
+void wrapped_NN(AXI_VAL in_stream[DIM1], AXI_VAL out_stream[DIM2]) {
+	T in[DIM1];
+	T out[DIM2];
+
+	// stream in input
+	stream_in: for (int i=0; i<DIM1; i++) {
+		in[i] = pop_stream<T,U,TI,TD>(in_stream[i]);
+	}
+
+	// do HW NN evaluation
+	neural_net<T,DIM1,DIM2>(in, out);
+
+	// stream out result
+	stream_out: for (int i=0; i<DIM2; i++) {
+		out_stream[i] = push_stream<T,U,TI,TD>(out[i], i == (DIM2-1));
+	}
+}
 
 #endif
 
