@@ -4,7 +4,7 @@
 ## Copyright (C) 1986-2019 Xilinx, Inc. All Rights Reserved.
 ############################################################
 open_project neural_net
-set_top neural_net
+set_top nn_accel
 add_files neural_net/solution1_no_optm/neural_net.cpp
 add_files neural_net/solution1_no_optm/neural_net.h
 add_files neural_net/solution1_no_optm/weights.h
