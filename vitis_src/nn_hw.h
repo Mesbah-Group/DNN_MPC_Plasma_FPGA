@@ -16,7 +16,7 @@
 #define NUM_OUTPUTS 2
 #define N 1
 
-void Start_HW_Accelerator();
+int Start_HW_Accelerator();
 int Setup_HW_Accelerator(float input[NUM_INPUTS], float output[NUM_OUTPUTS], bool scale01, int dma_size);
 int Run_HW_Accelerator(float input[NUM_INPUTS], float output[NUM_OUTPUTS], bool scale01, int dma_size);
 
