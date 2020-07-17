@@ -32,7 +32,7 @@ data_t relu(data_t z);
 /*********** MACROS ************/
 #define DMA_DEV_ID XPAR_AXIDMA_0_DEVICE_ID
 #define TIMER_DEV_ID XPAR_AXI_TIMER_0_DEVICE_ID
-#define NUM_TESTS 512
+#define NUM_TESTS 1024
 
 /*********** VARIABLE DEFINITIONS **********/
 u16 DeviceId = DMA_DEV_ID;

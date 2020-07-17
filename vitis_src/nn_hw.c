@@ -79,13 +79,13 @@ int XNnSetupInterrupt() {
 	Xil_ExceptionEnable();
 
 	// Connect the Adder ISR to the exception table
-//	result = XScuGic_Connect(&ScuGic, XPAR_FABRIC_NN_ACCEL_0_INTERRUPT_INTR, (Xil_InterruptHandler) XNnIsr, &xnn_dev);
-//	if (result != XST_SUCCESS) {
-//		return result;
-//	}
-//
-//	// Enable the Adder ISR
-//	XScuGic_Enable(&ScuGic, XPAR_FABRIC_NN_ACCEL_0_INTERRUPT_INTR);
+	result = XScuGic_Connect(&ScuGic, XPAR_FABRIC_NN_ACCEL_0_INTERRUPT_INTR, (Xil_InterruptHandler) XNnIsr, &xnn_dev);
+	if (result != XST_SUCCESS) {
+		return result;
+	}
+
+	// Enable the Adder ISR
+	XScuGic_Enable(&ScuGic, XPAR_FABRIC_NN_ACCEL_0_INTERRUPT_INTR);
 
 	return XST_SUCCESS;
 }
