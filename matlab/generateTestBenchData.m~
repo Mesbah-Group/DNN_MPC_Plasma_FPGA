@@ -6,30 +6,21 @@ in = [0.329648 0.721062 0.496215]';
 out = sim(net, in);
 
 filename = 'out.txt';
-filename2 = 'in.txt';
 sprintf('The output of the NN was')
 out
 sprintf('and was written to a file named %s', filename)
 fh = fopen(filename, 'w');
-fh2 = fopen(filename2, 'w');
 fprintf(fh, '%f ', out);
-fprintf(fh, '\n');
-fprintf(fh2, '%f ', in);
-fprintf(fh2, '\n');
 
 num_tests = 1023;
 test_in = rand(num_tests,3);
 for i = 1:num_tests
-    in = test_in(i,:)';
+    in = test_in(i,:);
     out = sim(net, in);
     fprintf(fh, '%f ', out);
-    fprintf(fh, '\n');
-    fprintf(fh2, '%f ', in);
-    fprintf(fh2, '\n');
 end
 
-fclose(fh);
-fclose(fh2);
+fclose(
     
 % copied from casadiDNN.m from Angelo's code
 % extract weights and biases from neural network
