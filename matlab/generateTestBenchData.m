@@ -12,19 +12,16 @@ out
 sprintf('and was written to a file named %s', filename)
 fh = fopen(filename, 'w');
 fh2 = fopen(filename2, 'w');
-fprintf(fh, '%f ', out);
-fprintf(fh, '\n');
-fprintf(fh2, '%f ', in);
-fprintf(fh2, '\n');
 
 num_tests = 1023;
-test_in = rand(num_tests,3);
+% test_in = rand(num_tests,3);
+load('test_input.mat', 'test_in')
 for i = 1:num_tests
     in = test_in(i,:)';
     out = sim(net, in);
-    fprintf(fh, '%f ', out);
+    fprintf(fh, '%f, %f', out);
     fprintf(fh, '\n');
-    fprintf(fh2, '%f ', in);
+    fprintf(fh2, '%f, %f, %f', in);
     fprintf(fh2, '\n');
 end
 
