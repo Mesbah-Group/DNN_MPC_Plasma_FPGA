@@ -13,7 +13,7 @@ sprintf('and was written to a file named %s', filename)
 fh = fopen(filename, 'w');
 fh2 = fopen(filename2, 'w');
 
-num_tests = 256;
+num_tests = 64;
 % test_in = rand(num_tests,3);
 load('test_input.mat', 'test_in')
 for i = 1:num_tests
