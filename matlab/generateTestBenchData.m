@@ -20,9 +20,9 @@ for i = 1:num_tests
     in = test_in(i,:)';
     out = sim(net, in);
     fprintf(fh, '%f, %f, ', out);
-%     fprintf(fh, '\n');
+    fprintf(fh, '\n');
     fprintf(fh2, '%f, %f, %f, ', in);
-%     fprintf(fh2, '\n');
+    fprintf(fh2, '\n');
 end
 
 fclose(fh);
