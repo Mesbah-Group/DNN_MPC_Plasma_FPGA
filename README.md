@@ -1,4 +1,4 @@
-# NN_FPGA
+# DNN_MPC_Plasma_FPGA
 
 Project files for a neural network (NN) implementation on an FPGA using Vivado HLS. Implementation is based on the NN trained by Angelo at [this repository](https://github.com/adbonzanini/DNN-MPC-Plasma).
 
