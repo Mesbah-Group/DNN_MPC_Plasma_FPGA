@@ -1,0 +1,703 @@
+
+{
+  'fileSets' => [
+    {
+      'files' => [
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel_AXILiteS_s_axi.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel_fmul_32ns_32ns_32_4_max_dsp_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/regslice_core.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel_fadd_32ns_32ns_32_5_full_dsp_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel_mux_63_32_1_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel_fcmp_32ns_32ns_1_2_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel_out1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel_nn_accel.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_sim/nn_accel.v'
+        }
+      ],
+      'name' => 'vivado_hls_sim_verilog_fileset'
+    },
+    {
+      'files' => [
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel_fcmp_32ns_32ns_1_2_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel_AXILiteS_s_axi.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel_fmul_32ns_32ns_32_4_max_dsp_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel_out1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/regslice_core.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel_fadd_32ns_32ns_32_5_full_dsp_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel_mux_63_32_1_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel_nn_accel.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_sim/nn_accel.vhd'
+        }
+      ],
+      'name' => 'vivado_hls_sim_vhdl_fileset'
+    },
+    {
+      'files' => [
+        {
+          'fileType' => 'TCLSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_impl/nn_accel_nn_accel_ap_fadd_3_full_dsp_32_ip.tcl'
+        },
+        {
+          'fileType' => 'TCLSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_impl/nn_accel_nn_accel_ap_fcmp_0_no_dsp_32_ip.tcl'
+        },
+        {
+          'fileType' => 'TCLSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_impl/nn_accel_nn_accel_ap_fmul_2_max_dsp_32_ip.tcl'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel_AXILiteS_s_axi',
+          'name' => 'verilog_impl/nn_accel_nn_accel_AXILiteS_s_axi.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel_fmul_32ns_32ns_32_4_max_dsp_1',
+          'name' => 'verilog_impl/nn_accel_nn_accel_fmul_32ns_32ns_32_4_max_dsp_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'regslice_core',
+          'name' => 'verilog_impl/regslice_core.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel_fadd_32ns_32ns_32_5_full_dsp_1',
+          'name' => 'verilog_impl/nn_accel_nn_accel_fadd_32ns_32ns_32_5_full_dsp_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel_mux_63_32_1_1',
+          'name' => 'verilog_impl/nn_accel_nn_accel_mux_63_32_1_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel_fcmp_32ns_32ns_1_2_1',
+          'name' => 'verilog_impl/nn_accel_nn_accel_fcmp_32ns_32ns_1_2_1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel_out1',
+          'name' => 'verilog_impl/nn_accel_nn_accel_out1.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'nn_accel_nn_accel',
+          'name' => 'verilog_impl/nn_accel_nn_accel.v'
+        },
+        {
+          'fileType' => 'verilogSource',
+          'logicalName' => 'work',
+          'name' => 'verilog_impl/nn_accel.v'
+        }
+      ],
+      'name' => 'vivado_hls_impl_verilog_fileset'
+    },
+    {
+      'files' => [
+        {
+          'fileType' => 'TCLSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_ap_fadd_3_full_dsp_32_ip.tcl'
+        },
+        {
+          'fileType' => 'TCLSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_ap_fcmp_0_no_dsp_32_ip.tcl'
+        },
+        {
+          'fileType' => 'TCLSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_ap_fmul_2_max_dsp_32_ip.tcl'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_fcmp_32ns_32ns_1_2_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_AXILiteS_s_axi.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_fmul_32ns_32ns_32_4_max_dsp_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_out1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/regslice_core.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_fadd_32ns_32ns_32_5_full_dsp_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel_mux_63_32_1_1.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel_nn_accel.vhd'
+        },
+        {
+          'fileType' => 'vhdlSource',
+          'logicalName' => 'work',
+          'name' => 'vhdl_impl/nn_accel.vhd'
+        }
+      ],
+      'name' => 'vivado_hls_impl_vhdl_fileset'
+    }
+  ],
+  'DesignConstraint' => {
+      'clk_period' => '10.000'
+  },
+  'library' => 'VIVADO_HLS',
+  'model' => {
+    'modelParameters'=>{
+        'combinational' => '0',
+        'latency' => '191',
+        'II' => 'x'
+    },
+    'ports' => [
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_AWVALID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_AWREADY',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '3',
+        'name' => 's_axi_AXILiteS_AWADDR',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_WVALID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_WREADY',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '31',
+        'name' => 's_axi_AXILiteS_WDATA',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '3',
+        'name' => 's_axi_AXILiteS_WSTRB',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_ARVALID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_ARREADY',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '3',
+        'name' => 's_axi_AXILiteS_ARADDR',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_RVALID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_RREADY',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '31',
+        'name' => 's_axi_AXILiteS_RDATA',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '1',
+        'name' => 's_axi_AXILiteS_RRESP',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_BVALID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 's_axi_AXILiteS_BREADY',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '1',
+        'name' => 's_axi_AXILiteS_BRESP',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'bool'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 'ap_clk',
+        'right' => '0',
+        'type' => 'std_logic'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'bool'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 'ap_rst_n',
+        'right' => '0',
+        'type' => 'std_logic'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Signed'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 'interrupt',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '31',
+        'name' => 'INPUT_STREAM_TDATA',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'bool'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 'INPUT_STREAM_TVALID',
+        'right' => '0',
+        'type' => 'std_logic'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'bool'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 'INPUT_STREAM_TREADY',
+        'right' => '0',
+        'type' => 'std_logic'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '4',
+        'name' => 'INPUT_STREAM_TDEST',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '3',
+        'name' => 'INPUT_STREAM_TKEEP',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '3',
+        'name' => 'INPUT_STREAM_TSTRB',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '3',
+        'name' => 'INPUT_STREAM_TUSER',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 'INPUT_STREAM_TLAST',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'in',
+        'left' => '4',
+        'name' => 'INPUT_STREAM_TID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '31',
+        'name' => 'OUTPUT_STREAM_TDATA',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'bool'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 'OUTPUT_STREAM_TVALID',
+        'right' => '0',
+        'type' => 'std_logic'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'bool'
+        },
+        'direction' => 'in',
+        'left' => '0',
+        'name' => 'OUTPUT_STREAM_TREADY',
+        'right' => '0',
+        'type' => 'std_logic'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '4',
+        'name' => 'OUTPUT_STREAM_TDEST',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '3',
+        'name' => 'OUTPUT_STREAM_TKEEP',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '3',
+        'name' => 'OUTPUT_STREAM_TSTRB',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '3',
+        'name' => 'OUTPUT_STREAM_TUSER',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '0',
+        'name' => 'OUTPUT_STREAM_TLAST',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      },
+      {
+        'dataType' => {
+          'fractionWidth' => '0',
+          'type' => 'Unsigned'
+        },
+        'direction' => 'out',
+        'left' => '4',
+        'name' => 'OUTPUT_STREAM_TID',
+        'right' => '0',
+        'type' => 'std_logic_vector'
+      }
+    ],
+    'views' => [
+      {
+        'envIdentifier' => 'verilogSource:sysgen.xilinx.com:synthesis',
+        'fileSetRef' => {
+          'localName' => 'vivado_hls_impl_verilog_fileset'
+        },
+        'language' => 'VERILOG',
+        'name' => 'xilinx_verilogsynthesis'
+      },
+      {
+        'envIdentifier' => 'vhdlSource:sysgen.xilinx.com:synthesis',
+        'fileSetRef' => {
+          'localName' => 'vivado_hls_impl_vhdl_fileset'
+        },
+        'language' => 'VHDL',
+        'name' => 'xilinx_vhdlsynthesis'
+      },
+      {
+        'envIdentifier' => 'verilogSource:sysgen.xilinx.com:synthesis',
+        'fileSetRef' => {
+          'localName' => 'vivado_hls_sim_verilog_fileset'
+        },
+        'language' => 'VERILOG',
+        'name' => 'xilinx_verilogsimulation'
+      },
+      {
+        'envIdentifier' => 'vhdlSource:sysgen.xilinx.com:synthesis',
+        'fileSetRef' => {
+          'localName' => 'vivado_hls_sim_vhdl_fileset'
+        },
+        'language' => 'VHDL',
+        'name' => 'xilinx_vhdlsimulation'
+      }
+    ]
+  },
+  'name' => 'nn_accel',
+  'vendor' => 'xilinx.com',
+  'version' => '1.0'
+}
